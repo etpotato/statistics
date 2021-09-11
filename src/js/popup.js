@@ -1,21 +1,26 @@
+const NOSCROLL_CLASS = 'no-scroll';
+const POPUP_ACTIVE_CLASS = 'popup--open';
+const DEFAULT_UNDERLAY_CLASS = 'js-popup-underlay';
+const DEFAULT_CLOSE_CLASS = 'js-popup-close';
+
 const Popup = class {
-  constructor (popupElem, underlayClass = 'js-popup-underlay', closeClass = 'js-popup-close') {
+  constructor (popupElem, underlayClass = DEFAULT_UNDERLAY_CLASS, closeClass = DEFAULT_CLOSE_CLASS) {
     this.popupElement = popupElem;
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
     this._underlayClass = underlayClass;
     this._closeClass = closeClass;
-    this._activeClass = 'popup-open';
+    this._activeClass = POPUP_ACTIVE_CLASS;
     this._escHandler = this._escHandler.bind(this);
     this._closeHandler = this._closeHandler.bind(this);
   }
 
   open () {
-    this.popupElement.style.display = 'flex';
+    this.popupElement.style.display = 'block';
     requestAnimationFrame(() => {
       this.popupElement.classList.add(this._activeClass);
       this._addListeners();
-      document.body.classList.add('no-scroll');
+      document.body.classList.add(NOSCROLL_CLASS);
     });
   }
 
@@ -24,10 +29,8 @@ const Popup = class {
     this.popupElement.addEventListener('transitionend', () => {
       this.popupElement.style.display = 'none';
       this._removeListeners();
-      document.body.classList.remove('no-scroll');
-    }, {
-      once: true,
-    });
+      document.body.classList.remove(NOSCROLL_CLASS);
+    }, { once: true });
   }
 
   _closeHandler (evt) {
@@ -58,6 +61,5 @@ const Popup = class {
     document.removeEventListener('keydown', this._escHandler);
   }
 };
-
 
 export default Popup;
