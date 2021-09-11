@@ -4,6 +4,272 @@
 
 {% block page %}
   <main class="page__main main">
-    <div class="container"></div>
+    <div class="container">
+      <div class="stats">
+        <h1 class="stats__title">Statistics</h1>
+        <section class="stats__controls">
+          <h2 class="stats__controls-title">Parameters</h2>
+          <form class="stats__form" action="/" method="GET" enctype="application/x-www-form-urlencoded">
+            <fieldset class="stats__form-item stats__radio-wrap">
+              <label class="stats__radio-label">
+                <input class="stats__radio visually-hidden" type="radio" name="GRAPH_TYPE" value="bar" checked>
+                <span class="button stats__radio-text">Bar chart</span>
+              </label>
+              <label class="stats__radio-label">
+                <input class="stats__radio visually-hidden" type="radio" name="GRAPH_TYPE" value="line">
+                <span class="button stats__radio-text">Line chart</span>
+              </label>
+              <label class="stats__radio-label">
+                <input class="stats__radio visually-hidden" type="radio" name="GRAPH_TYPE" value="map">
+                <span class="button stats__radio-text">Map</span>
+              </label>
+            </fieldset>
+            {# <label class="stats__label">
+              <input class="stats__radio visually-hidden" type="radio" name="MAIN_PARAM" value="area" checked>
+                <span class="button stats__radio-text">По месту проведения</span>
+            </label>
+            <label class="stats__label">
+              <input class="stats__radio visually-hidden" type="radio" name="MAIN_PARAM" value="skill">
+              <span class="button stats__radio-text">По квалификации</span>
+            </label> #}
+            <div class="stats__form-item choice js-choice" data-id="multipleUnique" data-choice-type="multiple" data-choice-max="10">
+              <label class="choice__label">
+                <select class="choice__select js-choice-select" multiple name="MULTISELECT[]">
+                  {% set areas = [
+                    {
+                      name: 'Союз «Тамбовская областная торгово-промышленная палата»',
+                      index: 248272,
+                    },
+                    {
+                      name: '«Красноярский Экологический ЦОК»',
+                      index: 198406,
+                    },
+                    {
+                      name: '«Региональный центр развития, оценки, сертификации квалификаций и бизнеса»',
+                      index: 198408,
+                    },
+                    {
+                      name: 'Автономная некоммерческая организация «Центр оценки профессионального мастерства и квалификации педагогов»',
+                      index: 248273,
+                    },
+                    {
+                      name: 'АНО «Строители Байкальского региона»',
+                      index: 198410,
+                    },
+                    {
+                      name: 'АНО «Центр развития образования и сертификации персонала «Универсум»',
+                      index: 160291,
+                    },
+                    {
+                      name: 'АНО «ЦОК по строительству в Сибири»',
+                      index: 239079,
+                    },
+                    {
+                      name: 'АНО ВО «Московский информационно-технологический университет – Московский архитектурно-строительный институт»',
+                      index: 239083,
+                    },
+                    {
+                      name: 'АНОО ВО «Институт социального образования»',
+                      index: 218739,
+                    },
+                    {
+                      name: 'АО "Владимирский Хлебокомбинат"',
+                      index: 191801,
+                    },
+                    {
+                      name: 'АО «МСЛ»',
+                      index: 191914,
+                    },
+                    {
+                      name: 'Ассоциация «РООР «Союз предприятий ЖКХ МО»',
+                      index: 227168,
+                    },
+                    {
+                      name: 'Аэрокосмический колледж ФГБОУ ВО «Сибирский государственный университет науки и технологий им. м. Ф. Решетнева»',
+                      index: 206053,
+                    },
+                  ]%}
+                  {% for area in areas %}
+                  <option class="choice__option" value="{{ area.index }}">{{ area.name }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+              <ul class="choice__selected js-choice-selected"></ul>
+            </div>
+            <div class="stats__form-item choice js-choice" data-id="singleUnique" data-choice-type="single" data-choice-max="">
+              <label class="choice__label">
+                <select class="choice__select js-choice-select" name="SINGLESELECT">
+                  {% set areas = [
+                    {
+                      name: 'Союз «Тамбовская областная торгово-промышленная палата»',
+                      index: 248272,
+                    },
+                    {
+                      name: '«Красноярский Экологический ЦОК»',
+                      index: 198406,
+                    },
+                    {
+                      name: '«Региональный центр развития, оценки, сертификации квалификаций и бизнеса»',
+                      index: 198408,
+                    },
+                    {
+                      name: 'Автономная некоммерческая организация «Центр оценки профессионального мастерства и квалификации педагогов»',
+                      index: 248273,
+                    },
+                    {
+                      name: 'АНО «Строители Байкальского региона»',
+                      index: 198410,
+                    },
+                    {
+                      name: 'АНО «Центр развития образования и сертификации персонала «Универсум»',
+                      index: 160291,
+                    },
+                    {
+                      name: 'АНО «ЦОК по строительству в Сибири»',
+                      index: 239079,
+                    },
+                    {
+                      name: 'АНО ВО «Московский информационно-технологический университет – Московский архитектурно-строительный институт»',
+                      index: 239083,
+                    },
+                    {
+                      name: 'АНОО ВО «Институт социального образования»',
+                      index: 218739,
+                    },
+                    {
+                      name: 'АО "Владимирский Хлебокомбинат"',
+                      index: 191801,
+                    },
+                    {
+                      name: 'АО «МСЛ»',
+                      index: 191914,
+                    },
+                    {
+                      name: 'Ассоциация «РООР «Союз предприятий ЖКХ МО»',
+                      index: 227168,
+                    },
+                    {
+                      name: 'Аэрокосмический колледж ФГБОУ ВО «Сибирский государственный университет науки и технологий им. м. Ф. Решетнева»',
+                      index: 206053,
+                    },
+                  ]%}
+                  <option class="choice__option" value="" selected disabled>Место проведения экзамена</option>
+                  {% for area in areas %}
+                  <option class="choice__option" value="{{ area.index }}">{{ area.name }}</option>
+                  {% endfor %}
+                </select>
+                <span class="stats__toggle stats__select-toggle"></span>
+              </label>
+            </div>
+            <div class="stats__form-item button-wrap">
+              <button class="button button--active stats__filter-button" type="reset">Сбросить фильтр</button>
+              <button class="button button--full stats__filter-button" type="submit">Обновить статистику</button>
+            </div>
+          </form>
+        </section>
+        <section class="stats__content">
+          <div class="stats__an-text-wrap js-stats-chart-print-text">
+            <div class="stats__an-top-wrap">
+              <p class="stats__an-city js-stats-area"></p>
+              <p class="stats__an-time">
+                <span class="stats__an-time-start js-stats-interval-start"></span> -
+                <span class="stats__an-time-end js-stats-interval-end"></span>
+              </p>
+            </div>
+            <h3 class="stats__title stats__an-title js-stats-name">
+            </h3>
+            <ul class="stats__an-param-list js-stats-props">
+            </ul>
+          </div>
+          <ul class="stats__graph-list">
+            {% set graphs = [
+              {
+                title: 'Записи на теоретический экзамен',
+                type: 'request',
+              },
+              {
+                title: 'Теоретический экзамен сдан успешно',
+                type: 'success',
+              },
+              {
+                title: 'Теоретический экзамен не сдан',
+                type: 'fail',
+              },
+            ]%}
+            {% for graph in graphs %}
+            <li class="stats__graph-item stats__box js-stats-chart-parent" data-chart-type="{{ graph.type }}">
+              <div class="stats__graph-top-wrap">
+                <h4 class="stats__graph-title js-stats-chart-print-title">{{ graph.title }}</h4>
+                <button class="stats__graph-print js-stats-chart-print" type="button">
+                  <svg class="stats__graph-icon">
+                    <use href="#chart-print"></use>
+                  </svg>
+                  <span class="visually-hidden">Загрузить график</span>
+                </button>
+              </div>
+              <div class="stats__graph-middle-wrap">
+                <ul class="stats__graph-tab">
+                  <li class="stats__graph-tab-item">
+                    <button class="stats__graph-tab-button js-stats-chart-toggle" data-chart-view="bar" type="button">Общая сводка</button>
+                  </li>
+                  <li class="stats__graph-tab-item">
+                    <button class="stats__graph-tab-button js-stats-chart-toggle" data-chart-view="line" type="button">По датам</button>
+                  </li>
+                </ul>
+                <div class="stats__graph-zoom">
+                  <p class="stats__graph-zoom-text">Масштаб</p>
+                  <div class="stats__graph-zoom-wrap">
+                    <div class="stats__graph-zoom-bar"></div>
+                    <div class="stats__graph-zoom-toggle" style="left: 0"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="stats__graph-bottom-wrap">
+                <canvas class="stats__graph-chart js-stats-chart" data-chart-view="bar" height="250" style="width: 100%; height: 250px"></canvas>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section class="stats__content">
+          <h3 class="stats__an-map-title">Сводные данные на карте</h3>
+          <ul class="stats__graph-list">
+            {% set graphs = [
+              {
+                title: 'Записи на теоретический экзамен',
+                type: 'request',
+              },
+              {
+                title: 'Теоретический экзамен сдан успешно',
+                type: 'success',
+              },
+              {
+                title: 'Теоретический экзамен не сдан',
+                type: 'fail',
+              },
+            ]%}
+            {% for graph in graphs %}
+            <li class="stats__graph-item stats__box js-stats-map-parent">
+              <div class="stats__graph-top-wrap">
+                <h4 class="stats__graph-title">{{ graph.title }}</h4>
+                <button class="stats__graph-print js-stats-map-print" type="button">
+                  <svg class="stats__graph-icon">
+                    <use href="#chart-print"></use>
+                  </svg>
+                  <span class="visually-hidden">Загрузить карту</span>
+                </button>
+              </div>
+              <div class="stats__graph-bottom-wrap stats__map-wrap">
+                <div class="stats__map js-stats-map" data-chart-type="{{ graph.type }}"></div>
+                <div class="stats__map-grid stats__box">
+                  <ul class="stats__map-grid-list js-stats-map-grid"></ul>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+      </div>
+    </div>
   </main>
 {% endblock %}

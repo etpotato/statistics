@@ -61,6 +61,7 @@
   },
   "type": "module",
   "dependencies": {
+    "chart.js": "^3.5.1",
     "choices.js": "^9.0.1"
   }
 }
