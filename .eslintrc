@@ -10,3 +10,12 @@ env:
 
 extends:
   "htmlacademy/vanilla"
+
+rules:
+  curly:
+    - error
+    - multi
+    - consistent
+  arrow-parens:
+    - 2
+    - as-needed

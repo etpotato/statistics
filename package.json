@@ -59,5 +59,8 @@
   "engines": {
     "node": "14.17.5"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "choices.js": "^9.0.1"
+  }
 }
