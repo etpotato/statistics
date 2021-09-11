@@ -1,0 +1,87 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+address {
+  font-style: normal;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+label {
+  cursor: pointer;
+  user-select: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.responsive-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+
+  iframe,
+  object,
+  embed {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $mobile-container-width;
+  padding: 0 1.6rem;
+
+  @media (min-width: $desktop-width) {
+    max-width: $desktop-container-width;
+    padding: 0 8rem;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+
+.nobr {
+  white-space: nowrap;
+}
+
+.no-scroll {
+  max-height: 100vh;
+  overflow: hidden;
+}

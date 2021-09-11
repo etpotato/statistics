@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}Default title{% endblock %}</title>
+
+  <link rel="stylesheet" href="./styles/main.min.css">
+
+  {% include 'includes/favicon.twig' %}
+  <meta name="msapplication-TileColor" content="#fff">
+  <meta name="theme-color" content="#fff">
+</head>
+<body class="page">
+  {% include 'includes/header.twig' %}
+
+  {% block page %}{% endblock %}
+
+  {% include 'includes/footer.twig' %}
+
+  {% include 'includes/modal.twig' %}
+
+  <div style="height: 0; position: absolute; visibility: hidden; width: 0;">
+    <!-- inject:svg --><!-- endinject -->
+  </div>
+  <script src="./js/runtime.bundle.js?v1.0"></script>
+  <script src="./js/vendors.bundle.js?v1.0"></script>
+  <script src="./js/main.bundle.js?v1.0"></script>
+</body>
+</html>

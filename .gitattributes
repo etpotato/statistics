@@ -1,0 +1,47 @@
+# Общие настройки, которые всегда должны быть использованы для настроек вашего языка.
+# Автоматическое определение текстовых файлов и выполнение нормализации LF
+* text=auto
+
+#
+# Строка выше будет обрабатывать все файлы, которых нет в списке ниже.
+#
+
+# Documents
+*.doc     diff=astextplain
+*.DOC     diff=astextplain
+*.docx diff=astextplain
+*.DOCX diff=astextplain
+*.dot  diff=astextplain
+*.DOT  diff=astextplain
+*.pdf  diff=astextplain
+*.PDF     diff=astextplain
+*.rtf     diff=astextplain
+*.RTF     diff=astextplain
+*.md text
+*.tex text
+*.adoc text
+*.textile text
+*.mustache text
+*.csv text
+*.tab text
+*.tsv text
+*.sql text
+
+# Graphics
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.gif binary
+*.tif binary
+*.tiff binary
+# *.svg binary
+*.svg text
+*.eps binary
+# Fonts
+*.woff binary
+*.woff2 binary
+
+.gitattributes export-ignore
+.gitignore export-ignore
