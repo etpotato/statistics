@@ -1740,5 +1740,3 @@ $(document).on('click', '.js-export-statistics', function () {
     });
   });
 });
-
-

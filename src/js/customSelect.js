@@ -11,6 +11,33 @@ const SELECTED_REMOVE_CLASS = 'js-choice-remove';
 // const selects = selectParents.map(parent => parent.querySelector(`.${SELECT_CLASS}`));
 // const choices = {};
 
+// scroll selected text on hover
+const canScrollText = select => {
+  select.closest(`.${PARENT_CLASS}`).querySelector('.choices__selected-list').addEventListener('mouseover', evt => {
+    const text = evt.currentTarget.querySelector('.choices__selected');
+    text.textContent += '\u2000';
+    let index = 1;
+    function scroll () {
+      requestAnimationFrame(() => {
+        text.scroll({
+          left: index,
+        });
+        if (index === 0) return;
+        index += 1;
+        scroll();
+      });
+    }
+    scroll();
+    evt.currentTarget.addEventListener('mouseout', () => {
+      index = 0;
+      text.scroll({
+        left: 0,
+        behavior: 'smooth',
+      });
+    }, {once: true});
+  });
+};
+
 // render selected list item
 const renderSelected = (name, value) => {
   const item = document.createElement('li');
@@ -55,29 +82,32 @@ const getChoicesConfig = parentElement => {
     single: {
       classNames: {
         listDropdown: 'choices__dropdown',
-        listSingle: 'choices__list--single choices__selected-list stats__filter-input stats__filter-select',
+        listSingle: 'choices__list--single choices__selected-list choice__input',
         inputCloned: 'choices__search',
         itemSelectable: 'choices__selected',
         activeState: 'active',
         openState: 'open',
       },
-      searchPlaceholderValue: 'Поиск',
-      noResultsText: 'Совпадений не найдено',
+      searchPlaceholderValue: 'Search',
+      noResultsText: 'No results found',
       searchResultLimit: 10,
       callbackOnInit: function () {
         this.passedElement.element.addEventListener('change', () => {
-          this.itemList.element.style.color = '#b8bcc6';
+          this.itemList.element.style.color = '#050a35';
         });
+
+        // autoscroll on hover
+        canScrollText(this.passedElement.element);
       },
     },
     multiple: {
       maxItemCount: maxItemCount,
-      maxItemText: maxCount => `Максимальное количество - ${maxCount}`,
+      maxItemText: maxCount => `Only ${maxCount} values can be added`,
       removeItems: true,
       removeItemButton: true,
       searchResultLimit: 100,
-      noResultsText: 'Совпадений не найдено',
-      noChoicesText: 'Выберите место проведения экзамена',
+      noResultsText: 'No results found',
+      noChoicesText: 'No choices to choose from',
       classNames: {
         listDropdown: 'choices__dropdown',
         listSingle: 'choices__list--single choices__selected-list choice__select',
@@ -90,25 +120,25 @@ const getChoicesConfig = parentElement => {
         const choice = this;
         // select DOM tweaks
         this.dropdown.element.prepend(this.containerInner.element);
-        this.input.element.placeholder = 'Поиск ';
+        this.input.element.placeholder = 'Search ';
         const choosedTitle = document.createElement('div');
         choosedTitle.classList.add('choice__select-title-wrap');
         let text;
         if (this.config.maxItemCount > 0)
           text = `
-            <p class="choice__select-title">Выбранные</p>
-            <p class="choice__select-info">Максимальное количество — ${this.config.maxItemCount}</p>
+            <p class="choice__select-title">Selected</p>
+            <p class="choice__select-info">Maximum - ${this.config.maxItemCount} values</p>
           `;
         else
           text = `
-            <p class="choice__select-title">Выбранные</p>
+            <p class="choice__select-title">Selected</p>
             <p class="choice__select-info"></p>
           `;
         choosedTitle.innerHTML = text;
         this.containerInner.element.prepend(choosedTitle);
         const choicesTitle = document.createElement('div');
         choicesTitle.classList.add('choice__select-title-wrap');
-        choicesTitle.innerHTML = '<p class="choice__select-title">Список</p>';
+        choicesTitle.innerHTML = '<p class="choice__select-title">Choices list</p>';
         this.dropdown.element.insertBefore(choicesTitle, this.choiceList.element);
 
         syncSelect(choice);
@@ -128,11 +158,7 @@ const getChoicesConfig = parentElement => {
 
 const customSelect = selectParent =>  {
   const selectElement = selectParent.querySelector(`.${SELECT_CLASS}`);
-  console.log(getChoicesConfig(selectParent));
-  console.log(selectElement);
-
   return new Choices(selectElement, getChoicesConfig(selectParent));
 };
 
 export default customSelect;
-

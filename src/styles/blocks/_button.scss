@@ -13,10 +13,26 @@
   background-color: transparent;
   cursor: pointer;
   user-select: none;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+
+  @media (hover: hover) {
+    &:hover,
+    &:focus {
+      border-color: $accent;
+    }
+  }
 
   &--active {
     color: $accent;
     border-color: $accent;
+
+    @media (hover: hover) {
+      &:hover,
+      &:focus {
+        color: $text-main;
+        border-color: $text-main;
+      }
+    }
   }
 
   &--full {
@@ -24,10 +40,13 @@
     border-color: $accent;
     background-color: $accent;
 
-    &:hover {
-      color: $text-invert;
-      border-color: $accent;
-      background-color: $accent;
+    @media (hover: hover) {
+      &:hover,
+      &:focus {
+        color: $text-invert;
+        border-color: $text-main;
+        background-color: $text-main;
+      }
     }
   }
 

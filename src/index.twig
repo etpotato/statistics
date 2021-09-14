@@ -32,7 +32,7 @@
               <input class="stats__radio visually-hidden" type="radio" name="MAIN_PARAM" value="skill">
               <span class="button stats__radio-text">По квалификации</span>
             </label> #}
-            <div class="stats__form-item choice js-choice" data-id="multipleUnique" data-choice-type="multiple" data-choice-max="10">
+            <div class="stats__form-item choice choice--multiple js-choice" data-id="multipleUnique" data-choice-type="multiple" data-choice-max="10">
               <label class="choice__label">
                 <select class="choice__select js-choice-select" multiple name="MULTISELECT[]">
                   {% set areas = [
@@ -96,7 +96,7 @@
               </label>
               <ul class="choice__selected js-choice-selected"></ul>
             </div>
-            <div class="stats__form-item choice js-choice" data-id="singleUnique" data-choice-type="single" data-choice-max="">
+            <div class="stats__form-item choice choice--single js-choice" data-id="singleUnique" data-choice-type="single" data-choice-max="">
               <label class="choice__label">
                 <select class="choice__select js-choice-select" name="SINGLESELECT">
                   {% set areas = [
@@ -153,17 +153,17 @@
                       index: 206053,
                     },
                   ]%}
-                  <option class="choice__option" value="" selected disabled>Место проведения экзамена</option>
+                  <option class="choice__option" value="" selected disabled>Press to select</option>
                   {% for area in areas %}
                   <option class="choice__option" value="{{ area.index }}">{{ area.name }}</option>
                   {% endfor %}
                 </select>
-                <span class="stats__toggle stats__select-toggle"></span>
+                <span class="stats__toggle"></span>
               </label>
             </div>
-            <div class="stats__form-item button-wrap">
-              <button class="button button--active stats__filter-button" type="reset">Сбросить фильтр</button>
-              <button class="button button--full stats__filter-button" type="submit">Обновить статистику</button>
+            <div class="stats__form-item stats__button-wrap">
+              <button class="button button--active stats__button" type="reset">Clear filter</button>
+              <button class="button button--full stats__button" type="submit">Update data</button>
             </div>
           </form>
         </section>

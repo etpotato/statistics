@@ -215,4 +215,3 @@ const Map = class {
 }
 
 import { getGradeInColor } from './helpers.js';
-

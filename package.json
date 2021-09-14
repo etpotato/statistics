@@ -5,7 +5,7 @@
     "stylelint": "stylelint \"src/styles/**/*.scss\" --syntax scss",
     "eslint": "eslint src/js/",
     "test": "npm run editorconfig && npm run stylelint && npm run eslint",
-    "start": "npm run test && gulp",
+    "start": "gulp",
     "build": "npm run test && cross-env NODE_ENV=production gulp build"
   },
   "devDependencies": {
